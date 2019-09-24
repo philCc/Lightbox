@@ -13,6 +13,7 @@ public protocol LightboxControllerDismissalDelegate: class {
 public protocol LightboxControllerTouchDelegate: class {
 
   func lightboxController(_ controller: LightboxController, didTouch image: LightboxImage, at index: Int)
+    func lightboxController(_ controller: LightboxController, didLongPressed image: LightboxImage, at index: Int)
 }
 
 open class LightboxController: UIViewController {
@@ -405,13 +406,17 @@ extension LightboxController: PageViewDelegate {
   }
 
   func pageViewDidTouch(_ pageView: PageView) {
-    guard !pageView.hasZoomed else { return }
-
     imageTouchDelegate?.lightboxController(self, didTouch: images[currentPage], at: currentPage)
+
+    guard !pageView.hasZoomed else { return }
 
     let visible = (headerView.alpha == 1.0)
     toggleControls(pageView: pageView, visible: !visible)
   }
+
+    func pageViewLongPressed(_ pageView: PageView) {
+        imageTouchDelegate?.lightboxController(self, didLongPressed: images[currentPage], at: currentPage)
+    }
 }
 
 // MARK: - HeaderViewDelegate

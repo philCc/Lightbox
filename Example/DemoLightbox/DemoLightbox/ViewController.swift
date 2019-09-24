@@ -45,8 +45,18 @@ class ViewController: UIViewController {
     
     let controller = LightboxController(images: images)
     controller.dynamicBackground = true
-    
+    controller.modalPresentationStyle = .fullScreen
+    controller.imageTouchDelegate = self
     present(controller, animated: true, completion: nil)
   }
 }
 
+extension ViewController: LightboxControllerTouchDelegate {
+    func lightboxController(_ controller: LightboxController, didTouch image: LightboxImage, at index: Int) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+
+    func lightboxController(_ controller: LightboxController, didLongPressed image: LightboxImage, at index: Int) {
+        
+    }
+}
