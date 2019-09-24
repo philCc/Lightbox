@@ -144,7 +144,9 @@ class PageView: UIScrollView {
   }
 
     @objc func viewLongPressed(_ recognizer: UILongPressGestureRecognizer) {
-      pageViewDelegate?.pageViewLongPressed(self)
+        if recognizer.state == .began {
+            pageViewDelegate?.pageViewLongPressed(self)
+        }
     }
 
   // MARK: - Layout

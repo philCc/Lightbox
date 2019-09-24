@@ -57,6 +57,6 @@ extension ViewController: LightboxControllerTouchDelegate {
     }
 
     func lightboxController(_ controller: LightboxController, didLongPressed image: LightboxImage, at index: Int) {
-        
+        print("didLongPressed")
     }
 }
